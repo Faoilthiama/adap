@@ -1,4 +1,4 @@
-import { Name, DEFAULT_DELIMITER, ESCAPE_CHARACTER } from "./Name";
+import {DEFAULT_DELIMITER, Name} from "./Name";
 
 export class StringArrayName implements Name {
 
@@ -6,15 +6,17 @@ export class StringArrayName implements Name {
     protected delimiter: string = DEFAULT_DELIMITER;
 
     constructor(other: string[], delimiter?: string) {
-        throw new Error("needs implementation");
+        this.components = other
+        if (delimiter)
+            this.delimiter = delimiter
     }
 
     public asString(delimiter: string = this.delimiter): string {
-        throw new Error("needs implementation");
+        return this.components.join(delimiter);
     }
 
     public asDataString(): string {
-        throw new Error("needs implementation");
+        return this.components.join(this.delimiter);
     }
 
     public isEmpty(): boolean {
@@ -26,31 +28,32 @@ export class StringArrayName implements Name {
     }
 
     public getNoComponents(): number {
-        throw new Error("needs implementation");
+        return this.components.length
     }
 
     public getComponent(i: number): string {
-        throw new Error("needs implementation");
+        return this.components[i]
     }
 
     public setComponent(i: number, c: string): void {
-        throw new Error("needs implementation");
+        this.components[i] = c
     }
 
     public insert(i: number, c: string): void {
-        throw new Error("needs implementation");
+        this.components.splice(i, 0, c)
     }
 
     public append(c: string): void {
-        throw new Error("needs implementation");
+        this.components.push(c)
     }
 
     public remove(i: number): void {
-        throw new Error("needs implementation");
+        this.components.splice(i, 1)
     }
 
     public concat(other: Name): void {
-        throw new Error("needs implementation");
+        let other_components = other.asString(this.delimiter).split(this.delimiter)
+        this.components = this.components.concat(other_components)
     }
 
 }

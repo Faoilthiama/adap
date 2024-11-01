@@ -1,4 +1,4 @@
-import { Name, DEFAULT_DELIMITER, ESCAPE_CHARACTER } from "./Name";
+import {DEFAULT_DELIMITER, ESCAPE_CHARACTER, Name} from "./Name";
 
 export class StringName implements Name {
 
@@ -6,53 +6,69 @@ export class StringName implements Name {
 
     protected name: string = "";
     protected length: number = 0;
+    private pattern = new RegExp(`(?<!\\\\)${ESCAPE_CHARACTER}${this.delimiter}`, 'g');
 
     constructor(other: string, delimiter?: string) {
-        throw new Error("needs implementation");
+        this.name = other
+        if (delimiter)
+            this.delimiter = delimiter
+        this.length = this.name.split(this.pattern).length
     }
 
     public asString(delimiter: string = this.delimiter): string {
-        throw new Error("needs implementation");
+        let components = this.name.split(this.pattern)
+        return components.join(delimiter)
     }
 
     public asDataString(): string {
-        throw new Error("needs implementation");
+        return this.name
     }
 
     public isEmpty(): boolean {
-        throw new Error("needs implementation");
+        return this.name.length === 0
     }
 
     public getDelimiterCharacter(): string {
-        throw new Error("needs implementation");
+        return this.delimiter
     }
 
     public getNoComponents(): number {
-        throw new Error("needs implementation");
+        return this.length
     }
 
     public getComponent(x: number): string {
-        throw new Error("needs implementation");
+        let components = this.name.split(this.pattern)
+        return components[x]
     }
 
     public setComponent(n: number, c: string): void {
-        throw new Error("needs implementation");
+        let components = this.name.split(this.pattern)
+        components[n] = c
+        this.name = components.join(this.delimiter)
     }
 
     public insert(n: number, c: string): void {
-        throw new Error("needs implementation");
+        let components = this.name.split(this.pattern)
+        components.splice(n, 0, c)
+        this.name = components.join(this.delimiter)
+        this.length += 1
     }
 
     public append(c: string): void {
-        throw new Error("needs implementation");
+        this.name = this.name.concat(this.delimiter + c)
+        this.length += 1
     }
 
     public remove(n: number): void {
-        throw new Error("needs implementation");
+        let components = this.name.split(this.pattern)
+        components.splice(n, 1)
+        this.name = components.join(this.delimiter)
+        this.length -= 1
     }
 
     public concat(other: Name): void {
-        throw new Error("needs implementation");
+        this.name = this.name.concat(this.delimiter + other.asString(this.delimiter))
+        this.length += other.getNoComponents()
     }
 
 }
