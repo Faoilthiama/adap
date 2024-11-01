@@ -52,7 +52,7 @@ export class StringArrayName implements Name {
     }
 
     public concat(other: Name): void {
-        let other_components = other.asString(this.delimiter).split(this.delimiter)
+        let other_components = other.asDataString().split(DEFAULT_DELIMITER)
         this.components = this.components.concat(other_components)
     }
 
