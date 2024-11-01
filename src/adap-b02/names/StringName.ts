@@ -6,12 +6,13 @@ export class StringName implements Name {
 
     protected name: string = "";
     protected length: number = 0;
-    private pattern = new RegExp(`(?<!\\\\)${ESCAPE_CHARACTER}${this.delimiter}`, 'g');
+    private readonly pattern: RegExp = new RegExp('')
 
     constructor(other: string, delimiter?: string) {
         this.name = other
         if (delimiter)
             this.delimiter = delimiter
+        this.pattern = new RegExp(`(?<!\\\\)${ESCAPE_CHARACTER}${this.delimiter}`, 'g');
         this.length = this.name.split(this.pattern).length
     }
 
@@ -21,7 +22,8 @@ export class StringName implements Name {
     }
 
     public asDataString(): string {
-        return this.name
+        let components = this.name.split(this.pattern)
+        return components.join(DEFAULT_DELIMITER)
     }
 
     public isEmpty(): boolean {

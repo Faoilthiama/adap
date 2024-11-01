@@ -16,7 +16,7 @@ export class StringArrayName implements Name {
     }
 
     public asDataString(): string {
-        return this.components.join(this.delimiter);
+        return this.components.join(DEFAULT_DELIMITER);
     }
 
     public isEmpty(): boolean {
