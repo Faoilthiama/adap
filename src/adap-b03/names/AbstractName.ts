@@ -1,4 +1,4 @@
-import {Name, DEFAULT_DELIMITER, ESCAPE_CHARACTER} from "./Name";
+import {DEFAULT_DELIMITER, Name} from "./Name";
 
 export abstract class AbstractName implements Name {
 
@@ -26,6 +26,9 @@ export abstract class AbstractName implements Name {
     }
 
     public isEqual(other: Name): boolean {
+        if (this.getDelimiterCharacter() !== other.getDelimiterCharacter()) {
+            return false
+        }
         let len1 = this.getNoComponents()
         let len2 = other.getNoComponents()
         if (len1 !== len2) {
@@ -80,8 +83,8 @@ export abstract class AbstractName implements Name {
 
     public concat(other: Name): void {
         let other_components = other.asDataString().split(DEFAULT_DELIMITER)
-        for (let c in other_components) {
-            this.append(c)
+        for (let i = 0; i < other_components.length; i++) {
+            this.append(other_components[i])
         }
     }
 
