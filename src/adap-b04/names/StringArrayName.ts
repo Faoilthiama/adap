@@ -8,30 +8,7 @@ export class StringArrayName extends AbstractName {
 
     constructor(other: string[], delimiter?: string) {
         super();
-        this.components = other
-        if (delimiter)
-            this.delimiter = delimiter
-    }
-
-    public getNoComponents(): number {
-        return this.components.length
-    }
-
-    public getComponent(i: number): string {
-        return this.components[i]
-    }
-    public  setComponent(i: number, c: string) {
-        this.components[i] = c
-    }
-
-    public insert(i: number, c: string) {
-        this.components.splice(i, 0, c)
-    }
-    public append(c: string) {
-        this.components.push(c)
-    }
-    public remove(i: number) {
-        this.components.splice(i, 1)
+        throw new Error("needs implementation");
     }
 
     public clone(): Name {
@@ -63,6 +40,30 @@ export class StringArrayName extends AbstractName {
     }
 
     public getDelimiterCharacter(): string {
+        throw new Error("needs implementation");
+    }
+
+    public getNoComponents(): number {
+        throw new Error("needs implementation");
+    }
+
+    public getComponent(i: number): string {
+        throw new Error("needs implementation");
+    }
+
+    public setComponent(i: number, c: string) {
+        throw new Error("needs implementation");
+    }
+
+    public insert(i: number, c: string) {
+        throw new Error("needs implementation");
+    }
+
+    public append(c: string) {
+        throw new Error("needs implementation");
+    }
+
+    public remove(i: number) {
         throw new Error("needs implementation");
     }
 
