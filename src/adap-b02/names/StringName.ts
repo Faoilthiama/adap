@@ -1,12 +1,13 @@
-import {DEFAULT_DELIMITER, ESCAPE_CHARACTER, Name} from "./Name";
+import { DEFAULT_DELIMITER, ESCAPE_CHARACTER } from "../common/Printable";
+import { Name } from "./Name";
 
 export class StringName implements Name {
 
     protected delimiter: string = DEFAULT_DELIMITER;
-
     protected name: string = "";
     protected length: number = 0;
     private readonly pattern: RegExp = new RegExp('')
+    protected noComponents: number = 0;
 
     constructor(other: string, delimiter?: string) {
         this.name = other
